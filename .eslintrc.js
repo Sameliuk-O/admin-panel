@@ -118,7 +118,7 @@ module.exports = {
       },
     },
     {
-      files: ['e2e/utils/report/*.ts'],
+      files: ['e2e/mock/report/*.ts'],
       rules: {
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/ban-ts-comment': ['off'],

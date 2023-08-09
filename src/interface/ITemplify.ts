@@ -83,7 +83,7 @@ export interface Preview {
   id: number;
   isNew: boolean;
   isShownIfNotSupported: boolean;
-  requiredAppVersion: RequiredAppVersion;
+  requiredAppVersion: RequiredAppVersion | string;
   story: Feed;
   thumbnailURL: string;
   title: string;
