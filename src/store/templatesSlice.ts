@@ -1,18 +1,26 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { Category } from '../interface/ITemplify';
+import { Category, ITemplify, Preview } from '../interface/ITemplify';
 
-const initialState: Category[] | undefined = [];
+const initialState: ITemplify = {
+  categories: [],
+  onboardingPreviewIDs: [],
+  pages: [],
+  previews: {},
+};
 
 const templatesSlice = createSlice({
   initialState,
   name: 'template',
   reducers: {
-    setCategory: (state, action: PayloadAction<Category[] | undefined>) => {
-      return action.payload;
+    setCategory: (state, action: PayloadAction<Category[]>) => {
+      return { ...state, categories: action.payload };
+    },
+    setPreviews: (state, action: PayloadAction<{ [key: string]: Preview }>) => {
+      state.previews = action.payload;
     },
   },
 });
 
-export const { setCategory } = templatesSlice.actions;
+export const { setCategory, setPreviews } = templatesSlice.actions;
 export default templatesSlice.reducer;
