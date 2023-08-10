@@ -12,12 +12,15 @@ const Admin = () => {
     dispatch(setCategory(Data?.categories));
   }, []);
   console.log('category', category);
-
   return (
-    <div className="bg-violet">
-      <div className="container mx-auto">
-        <div className="text-cyan-50">admin</div>
-      </div>
+    <div>
+      <ul>
+        {category.map((el) => (
+          <li key={el.categoryID}>
+            <p>{el.name}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
