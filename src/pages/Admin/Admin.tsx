@@ -11,7 +11,6 @@ const Admin = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(setCategory(Data?.categories));
-    console.log(Data?.previews);
     dispatch(setPreviews(Data?.previews));
   }, []);
   return (
