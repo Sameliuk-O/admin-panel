@@ -8,8 +8,8 @@ const Admin = () => {
   // const { data } = useGetAllTemplatesQuery();
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(setCategory(Data?.categories));
-    dispatch(setPreviews(Data?.previews));
+    dispatch(setCategory(Data.categories));
+    dispatch(setPreviews(Data.previews));
   }, []);
   return (
     <div className="container mx-auto pl-10 pt-10">
