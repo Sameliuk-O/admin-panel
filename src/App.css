@@ -28,6 +28,14 @@
   color: #61dafb;
 }
 
+.active-page {
+  color: #9687FE;
+}
+
+.pagination li:hover {
+  color: #9687FE;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

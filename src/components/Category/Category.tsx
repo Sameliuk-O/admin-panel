@@ -5,7 +5,7 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 const Category = () => {
   const category = useAppSelector((state) => state.template.categories);
   return (
-    <ul>
+    <ul className="pr-10">
       {category &&
         category.map((el) => (
           <li className="py-1.5" key={el.categoryID}>

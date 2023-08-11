@@ -4,6 +4,7 @@ import { Category } from '../../components/Category';
 import { Footer } from '../../components/Footer';
 import { Header } from '../../components/Header';
 import { Admin } from '../../pages/Admin';
+import { SearchPage } from '../../pages/SearchPage';
 
 const RoutesComponent = () => {
   return (
@@ -13,6 +14,7 @@ const RoutesComponent = () => {
         <Category />
         <Routes>
           <Route element={<Admin />} path="/admin" />
+          <Route element={<SearchPage />} path="/admin/:id" />
           <Route element={<Navigate to="/admin" replace />} path="/*" />
         </Routes>
       </div>
