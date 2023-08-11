@@ -7,7 +7,7 @@ const Category = () => {
   return (
     <ul>
       {category &&
-        category?.map((el) => (
+        category.map((el) => (
           <li className="py-1.5" key={el.categoryID}>
             <Link className="hover:text-sky-600" to="/admin">
               {el.name}
