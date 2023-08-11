@@ -4,6 +4,7 @@ import { Category } from '../../components/Category';
 import { Footer } from '../../components/Footer';
 import { Header } from '../../components/Header';
 import { Admin } from '../../pages/Admin';
+import { CategoriesPage } from '../../pages/CategoriesPage';
 import { SearchPage } from '../../pages/SearchPage';
 
 const RoutesComponent = () => {
@@ -15,6 +16,7 @@ const RoutesComponent = () => {
         <Routes>
           <Route element={<Admin />} path="/admin" />
           <Route element={<SearchPage />} path="/admin/:id" />
+          <Route element={<CategoriesPage />} path="/admin/category/:title" />
           <Route element={<Navigate to="/admin" replace />} path="/*" />
         </Routes>
       </div>

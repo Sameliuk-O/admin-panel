@@ -9,7 +9,7 @@ const Category = () => {
       {category &&
         category.map((el) => (
           <li className="py-1.5" key={el.categoryID}>
-            <Link className="hover:text-sky-600" to="/admin">
+            <Link className="hover:text-sky-600" to={`/admin/category/${el.name}`}>
               {el.name}
             </Link>
           </li>
