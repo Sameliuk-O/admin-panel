@@ -4,6 +4,7 @@ module.exports = {
     extend: {
       colors: {
         violet: '#311a5d',
+        button: '#9687FE',
       },
     },
   },

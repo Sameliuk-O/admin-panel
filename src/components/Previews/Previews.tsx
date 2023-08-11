@@ -1,60 +1,72 @@
-// import { useEffect, useState } from 'react';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 
+import ReactPaginate from 'react-paginate';
+import { Link } from 'react-router-dom';
+
+import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import AIR_FEED from '../../images/air_feed.png';
-const Previews = () => {
-  const previews = useAppSelector((state) => state.template.previews);
-  // const heicURL = 'https://assets.templifyapp.com/previews/images/air_feed.heic';
-  // const [imageDataUrl, setImageDataUrl] = useState<string>('');
+import { ITemplate } from '../../interface/ITemplate';
+import { setSearchTemplate } from '../../store/searchSlice';
+const Template = lazy(() => import('../Template/Template'));
 
-  // useEffect(() => {
-  //   fetch(heicURL)
-  //     .then((response) => response.blob())
-  //     .then((heicBlob) => {
-  //       const image = new Image();
-  //       image.onload = () => {
-  //         const canvas = document.createElement('canvas');
-  //         canvas.width = image.width;
-  //         canvas.height = image.height;
-  //
-  //         const context = canvas.getContext('2d');
-  //         context?.drawImage(image, 0, 0);
-  //
-  //         canvas.toBlob((jpegBlob) => {
-  //           if (jpegBlob) {
-  //             const dataUrl = URL.createObjectURL(jpegBlob);
-  //             setImageDataUrl(dataUrl);
-  //           } else {
-  //             console.error('Conversion to JPEG failed.');
-  //           }
-  //         }, 'image/jpeg');
-  //       };
-  //
-  //       image.src = URL.createObjectURL(heicBlob);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error converting image:', error);
-  //     });
-  // }, []);
+const Previews: React.FC = () => {
+  const previews = useAppSelector((state) => state.template.previews);
+  const dispatch = useAppDispatch();
+  const itemsPerPage = 50;
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const handleClick = ({ id, title, videoURL }: ITemplate) => {
+    dispatch(setSearchTemplate({ id: id, title: title, videoURL: videoURL }));
+  };
+
+  const handlePageClick = (selected: { selected: number }) => {
+    setCurrentPage(selected.selected);
+  };
+
+  const offset = currentPage * itemsPerPage;
+  const pageCount = Math.ceil(Object.keys(previews).length / itemsPerPage);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentPage]);
+
   return (
-    <div className="grid grid-cols-5 gap-7">
-      {Object.keys(previews).map((key) => {
-        const {
-          id,
-          title,
-          feed: { imageURL },
-        } = previews[key];
-        return (
-          <div className="rounded-lg border-2 p-5" key={key}>
-            <img alt={title} className="rounded" src={AIR_FEED} />
-            <div className="flex pt-5">
-              <p className="pr-3 font-bold">ID: {id}</p>
-              <p className="pl-3 font-bold">Title: {title}</p>
-            </div>
-            <p className="pt-2"> Image URL: {imageURL}</p>
-          </div>
-        );
-      })}
+    <div>
+      <div className="grid grid-cols-5 gap-7">
+        {Object.keys(previews)
+          .slice(offset, offset + itemsPerPage)
+          .map((key) => {
+            const {
+              id,
+              title,
+              feed: { videoURL },
+            } = previews[key];
+            return (
+              <div className="rounded-lg border-2 p-5" key={key}>
+                <Link to={`/admin/${id}`} onClick={() => handleClick({ id, title, videoURL })}>
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <Template id={id} title={title} videoURL={videoURL} />
+                  </Suspense>
+                </Link>
+              </div>
+            );
+          })}
+      </div>
+      <div className="mx-auto my-10 max-w-xl">
+        <ReactPaginate
+          activeClassName="active-page"
+          breakClassName="pr-5"
+          breakLabel={'...'}
+          className="pagination flex justify-evenly pr-5"
+          containerClassName="pagination"
+          marginPagesDisplayed={2}
+          nextLabel={'→'}
+          pageCount={pageCount}
+          pageRangeDisplayed={20}
+          previousLabel={'←'}
+          onPageChange={handlePageClick}
+        />
+      </div>
     </div>
   );
 };
