@@ -2,16 +2,13 @@ import React, { useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { ITemplate } from '../../interface/ITemplate';
-import { setSearchTemplate } from '../../store/searchSlice';
 import { SearchTemplate } from '../SearchTemplate';
 
 const Search = () => {
   const previews = useAppSelector((state) => state.template.previews);
   const [inputValue, setInputValue] = useState<string>('');
-  const dispatch = useAppDispatch();
   const [searchValue, setSearchValue] = useState<ITemplate[]>([]);
   const pattern = new RegExp(`^${inputValue}`);
 
@@ -37,8 +34,7 @@ const Search = () => {
     setSearchValue(searchResults);
   }, [inputValue]);
 
-  const handleClick = ({ id, title, videoURL }: ITemplate) => {
-    dispatch(setSearchTemplate({ id: id, title: title, videoURL: videoURL }));
+  const handleClick = () => {
     setInputValue('');
     setSearchValue([]);
   };
@@ -64,12 +60,7 @@ const Search = () => {
           {searchValue.length > 0
             ? searchValue.map((el) => (
                 <li className="w-96 border text-white last:rounded-b-2xl" key={el.id}>
-                  <Link
-                    to={`/admin/${el.id}`}
-                    onClick={() =>
-                      handleClick({ id: el.id, title: el.title, videoURL: el.videoURL })
-                    }
-                  >
+                  <Link to={`/admin/${el.id}`} onClick={() => handleClick()}>
                     <SearchTemplate id={el.id} title={el.title} videoURL={el.videoURL} />
                   </Link>
                 </li>
