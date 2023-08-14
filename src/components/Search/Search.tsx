@@ -18,17 +18,18 @@ const Search = () => {
 
   const searchTemplate = (event: React.FormEvent) => {
     event.preventDefault();
-    Object.keys(previews).map((key) => {
-      const {
-        id,
-        title,
-        feed: { videoURL },
-      } = previews[key];
-      if (title === inputValue || id.toString() === inputValue) {
-        dispatch(setSearchTemplate({ id: id, title: title, videoURL: videoURL }));
-        navigate(`/admin/${id}`);
-      }
-    });
+    previews &&
+      Object.keys(previews).map((key) => {
+        const {
+          id,
+          title,
+          feed: { videoURL },
+        } = previews[key];
+        if (title === inputValue || id.toString() === inputValue) {
+          dispatch(setSearchTemplate({ id: id, title: title, videoURL: videoURL }));
+          navigate(`/admin/${id}`);
+        }
+      });
   };
 
   return (

@@ -24,7 +24,10 @@ const Previews: React.FC = () => {
   };
 
   const offset = currentPage * itemsPerPage;
-  const pageCount = Math.ceil(Object.keys(previews).length / itemsPerPage);
+  let pageCount = 0;
+  if (previews) {
+    pageCount = Math.ceil(Object.keys(previews).length / itemsPerPage);
+  }
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -33,24 +36,25 @@ const Previews: React.FC = () => {
   return (
     <div>
       <div className="grid grid-cols-5 gap-7">
-        {Object.keys(previews)
-          .slice(offset, offset + itemsPerPage)
-          .map((key) => {
-            const {
-              id,
-              title,
-              feed: { videoURL },
-            } = previews[key];
-            return (
-              <div className="rounded-lg border-2 p-5" key={key}>
-                <Link to={`/admin/${id}`} onClick={() => handleClick({ id, title, videoURL })}>
-                  <Suspense fallback={<div>Loading...</div>}>
-                    <Template id={id} title={title} videoURL={videoURL} />
-                  </Suspense>
-                </Link>
-              </div>
-            );
-          })}
+        {previews &&
+          Object.keys(previews)
+            .slice(offset, offset + itemsPerPage)
+            .map((key) => {
+              const {
+                id,
+                title,
+                feed: { videoURL },
+              } = previews[key];
+              return (
+                <div className="rounded-lg border-2 p-5" key={key}>
+                  <Link to={`/admin/${id}`} onClick={() => handleClick({ id, title, videoURL })}>
+                    <Suspense fallback={<div>Loading...</div>}>
+                      <Template id={id} title={title} videoURL={videoURL} />
+                    </Suspense>
+                  </Link>
+                </div>
+              );
+            })}
       </div>
       <div className="mx-auto my-10 max-w-xl">
         <ReactPaginate
