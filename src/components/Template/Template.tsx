@@ -18,8 +18,8 @@ const Template: React.FC<ITemplate> = ({ id, title, videoURL }) => {
         className={`${
           pathname != '/admin' && !pathname.includes('/admin/category') ? 'px-14' : ''
         } rounded`}
-        height="300"
-        width="500"
+        height="100"
+        width="200"
       >
         <source src={videoURL} type="video/mp4" />
       </video>

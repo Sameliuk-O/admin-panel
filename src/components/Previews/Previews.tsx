@@ -42,7 +42,7 @@ const Previews: React.FC = () => {
               feed: { videoURL },
             } = previews[key];
             return (
-              <div className="rounded-lg border-2 p-5" key={key}>
+              <div className="rounded-lg border-2 p-5" key={id}>
                 <Link to={`/admin/${id}`} onClick={() => handleClick({ id, title, videoURL })}>
                   <Suspense fallback={<div>Loading...</div>}>
                     <Template id={id} title={title} videoURL={videoURL} />

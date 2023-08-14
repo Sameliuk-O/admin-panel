@@ -8,15 +8,15 @@ const Category = () => {
   const pathParts = pathname.split('/');
   const lastPathSegment = Number(pathParts[pathParts.length - 1]);
   return (
-    <ul className="border-r pr-10">
+    <ul className="border-r pr-10 pt-10">
       {category &&
         category.map((el) => (
           <li className="py-1.5" key={el.categoryID}>
             <Link
               className={`${
                 lastPathSegment === el.categoryID ? 'text-button' : 'text-black'
-              } hover:text-sky-600`}
-              to={`/admin/category/${el.categoryID}`}
+              }  text-lg font-medium hover:text-sky-600`}
+              to={`/admin/category/${el.name}/${el.categoryID}`}
             >
               {el.name}
             </Link>

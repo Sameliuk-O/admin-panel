@@ -16,7 +16,10 @@ const RoutesComponent = () => {
         <Routes>
           <Route element={<Admin />} path="/admin" />
           <Route element={<SearchPage />} path="/admin/:id" />
-          <Route element={<CategoryTemplatesPage />} path="/admin/category/:categoryId" />
+          <Route
+            element={<CategoryTemplatesPage />}
+            path="/admin/category/:categoryName/:categoryId"
+          />
           <Route element={<Navigate to="/admin" replace />} path="/*" />
         </Routes>
       </div>

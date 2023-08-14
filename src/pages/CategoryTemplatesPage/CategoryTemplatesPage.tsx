@@ -18,7 +18,6 @@ const CategoryTemplatesPage = () => {
   const itemsPerPage = 50;
 
   const offset = currentPage * itemsPerPage;
-  const pageCount = Math.ceil(Object.keys(previews).length / itemsPerPage);
 
   const handlePageClick = (selected: { selected: number }) => {
     setCurrentPage(selected.selected);
@@ -55,19 +54,23 @@ const CategoryTemplatesPage = () => {
         ))}
       </div>
       <div className="mx-auto my-10 max-w-xl">
-        <ReactPaginate
-          activeClassName="active-page"
-          breakClassName="pr-5"
-          breakLabel={'...'}
-          className="pagination flex justify-evenly pr-5"
-          containerClassName="pagination"
-          marginPagesDisplayed={2}
-          nextLabel={'→'}
-          pageCount={pageCount}
-          pageRangeDisplayed={20}
-          previousLabel={'←'}
-          onPageChange={handlePageClick}
-        />
+        {categoryTemplates.length > itemsPerPage ? (
+          <ReactPaginate
+            activeClassName="active-page"
+            breakClassName="pr-5"
+            breakLabel={'...'}
+            className="pagination flex justify-evenly pr-5"
+            containerClassName="pagination"
+            marginPagesDisplayed={2}
+            nextLabel={'→'}
+            pageCount={Math.ceil(categoryTemplates.length / itemsPerPage)}
+            pageRangeDisplayed={20}
+            previousLabel={'←'}
+            onPageChange={handlePageClick}
+          />
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );
