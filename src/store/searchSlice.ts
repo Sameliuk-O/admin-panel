@@ -13,9 +13,10 @@ const searchSlice = createSlice({
   name: 'search',
   reducers: {
     setSearchTemplate: (state, action: PayloadAction<ITemplate>) => {
-      state.id = action.payload.id;
-      state.videoURL = action.payload.videoURL;
-      state.title = action.payload.title;
+      return action.payload;
+      // state.id = action.payload.id;
+      // state.videoURL = action.payload.videoURL;
+      // state.title = action.payload.title;
     },
   },
 });
