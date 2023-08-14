@@ -20,7 +20,7 @@ const Template: React.FC<ITemplate> = ({ id, title, videoURL }) => {
         </div>
       ) : (
         <video
-          className={`${pathname !== '/admin' ? 'px-14' : ''} rounded`}
+          className={`${pathname !== '/admin' ? 'h-[300px] w-[500px] pr-14' : ''} rounded`}
           height="300"
           width="500"
         >

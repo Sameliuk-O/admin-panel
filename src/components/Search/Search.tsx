@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
@@ -58,14 +58,6 @@ const Search = () => {
           value={inputValue}
           onChange={handleInputChange}
         />
-        {/*<button*/}
-        {/*  className={` ${*/}
-        {/*    searchValue.length > 0 ? 'rounded-tr-2xl' : 'rounded-r-2xl'*/}
-        {/*  } bg-white px-10 py-1.5 text-button hover:bg-button hover:text-white`}*/}
-        {/*  type="submit"*/}
-        {/*>*/}
-        {/*  Search*/}
-        {/*</button>*/}
       </form>
       <div>
         <ul className="absolute max-h-96 overflow-y-auto rounded-b-2xl bg-gray-400">

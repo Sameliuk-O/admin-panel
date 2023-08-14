@@ -16,7 +16,6 @@ const RoutesComponent = () => {
           <Routes>
             <Route element={<Admin />} path="/admin" />
             <Route element={<SearchPage />} path="/admin/:id" />
-            <Route element={<SearchPage />} path="/admin/search" />
             <Route element={<Navigate to="/admin" replace />} path="/*" />
           </Routes>
         </div>
