@@ -13,10 +13,10 @@ const templatesSlice = createSlice({
   initialState,
   name: 'template',
   reducers: {
-    setCategory: (state, action: PayloadAction<Category[]>) => {
+    setCategory: (state, action: PayloadAction<Category[] | undefined>) => {
       state.categories = action.payload;
     },
-    setPreviews: (state, action: PayloadAction<{ [key: string]: Preview }>) => {
+    setPreviews: (state, action: PayloadAction<{ [key: string]: Preview } | undefined>) => {
       state.previews = action.payload;
     },
   },
