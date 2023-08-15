@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import { useAppSelector } from '../../hooks/useAppSelector';
 
@@ -16,9 +16,6 @@ const TemplatePage = () => {
 
   return (
     <div className="mt-5">
-      <Link className=" hover:text-button" to={'-1'}>
-        Go Back
-      </Link>
       <div>
         <Suspense fallback={<div>Loading...</div>}>
           <div key={currentTemplate.id}>
