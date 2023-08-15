@@ -5,7 +5,7 @@ import { Footer } from '../../components/Footer';
 import { Header } from '../../components/Header';
 import { Admin } from '../../pages/Admin';
 import { CategoryTemplatesPage } from '../../pages/CategoryTemplatesPage';
-import { SearchPage } from '../../pages/SearchPage';
+import { SearchPage } from '../../pages/TemplatePage';
 
 const RoutesComponent = () => {
   return (

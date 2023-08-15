@@ -1,53 +1,73 @@
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { setSearchTemplate } from '../../store/searchSlice';
+import { ITemplate } from '../../interface/ITemplate';
+import SearchTemplate from '../SearchTemplate';
 
 const Search = () => {
   const previews = useAppSelector((state) => state.template.previews);
   const [inputValue, setInputValue] = useState<string>('');
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  const [searchValue, setSearchValue] = useState<ITemplate[]>([]);
+  const pattern = new RegExp(`^${inputValue}`);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
     setInputValue(event.target.value);
   };
 
-  const searchTemplate = (event: React.FormEvent) => {
-    event.preventDefault();
-    Object.keys(previews).map((key) => {
+  useEffect(() => {
+    const searchResults: ITemplate[] = [];
+    Object.keys(previews).forEach((key) => {
       const {
         id,
         title,
         feed: { videoURL },
       } = previews[key];
-      if (title === inputValue || id.toString() === inputValue) {
-        dispatch(setSearchTemplate({ id: id, title: title, videoURL: videoURL }));
-        navigate(`/admin/${id}`);
+      if (inputValue.length > 0) {
+        if (title.match(pattern) || id.toString().match(pattern)) {
+          searchResults.push({ id: id, title: title, videoURL: videoURL });
+        }
       }
     });
+    setSearchValue(searchResults);
+  }, [inputValue]);
+
+  const handleClick = () => {
+    setInputValue('');
+    setSearchValue([]);
+  };
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
   };
 
   return (
-    <div>
-      <form onSubmit={searchTemplate}>
+    <div className="relative">
+      <form onSubmit={handleSubmit}>
         <input
-          className="rounded-2xl py-1.5 pl-5 pr-10 text-button"
+          className={`${
+            searchValue.length > 0 ? 'rounded-t-2xl' : 'rounded-2xl'
+          } w-96 py-1.5 pl-5 pr-14 text-button`}
           placeholder="Search Template"
           type="text"
           value={inputValue}
           onChange={handleInputChange}
         />
-        <button
-          className="ml-5 rounded-2xl bg-white px-10 py-1.5 text-button hover:bg-button hover:text-white"
-          type="submit"
-        >
-          Search
-        </button>
       </form>
+      <div>
+        <ul className="absolute max-h-96 overflow-y-auto rounded-b-2xl bg-gray-400">
+          {searchValue.length > 0
+            ? searchValue.map((el) => (
+                <li className="w-96 border text-white last:rounded-b-2xl" key={el.id}>
+                  <Link to={`/admin/${el.id}`} onClick={handleClick}>
+                    <SearchTemplate id={el.id} title={el.title} videoURL={el.videoURL} />
+                  </Link>
+                </li>
+              ))
+            : null}
+        </ul>
+      </div>
     </div>
   );
 };
