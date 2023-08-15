@@ -1,8 +1,8 @@
 export interface ITemplify {
-  categories: Category[] | undefined;
+  categories: Category[];
   onboardingPreviewIDs: number[];
   pages: Page[];
-  previews: { [key: string]: Preview } | undefined;
+  previews: { [key: string]: Preview };
 }
 
 export interface Category {
