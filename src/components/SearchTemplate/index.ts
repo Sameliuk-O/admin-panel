@@ -1,1 +1,1 @@
-export { default as SearchTemplate } from './SearchTemplate';
+export { default } from './SearchTemplate';

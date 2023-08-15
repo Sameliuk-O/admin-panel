@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { ITemplate } from '../../interface/ITemplate';
-import { SearchTemplate } from '../SearchTemplate';
+import SearchTemplate from '../SearchTemplate';
 
 const Search = () => {
   const previews = useAppSelector((state) => state.template.previews);
@@ -60,7 +60,7 @@ const Search = () => {
           {searchValue.length > 0
             ? searchValue.map((el) => (
                 <li className="w-96 border text-white last:rounded-b-2xl" key={el.id}>
-                  <Link to={`/admin/${el.id}`} onClick={() => handleClick()}>
+                  <Link to={`/admin/${el.id}`} onClick={handleClick}>
                     <SearchTemplate id={el.id} title={el.title} videoURL={el.videoURL} />
                   </Link>
                 </li>
