@@ -1,1 +1,1 @@
-export { default as SearchPage } from './TemplatePage';
+export { default as TemplatePage } from './TemplatePage';
